@@ -42,9 +42,9 @@ type ChessboardBooking struct {
 	TotalAmount float64 `json:"totalAmount"`
 }
 
-// Chessboard возвращает все активные номера обоих объектов и активные брони (new/confirmed/checked_in)
-// в виде полос с timestamp-границами. Активные статусы: new, confirmed, checked_in.
-// checked_out, cancelled, no_show — НЕ показываются (решение пользователя).
+// Chessboard возвращает все активные номера обоих объектов и ВСЕ брони в окне
+// (включая терминальные: checked_out, cancelled, no_show — для истории).
+// Клиент сам решает, какие статусы показывать и как их раскрашивать.
 func (s *AvailabilityService) Chessboard(ctx context.Context, from time.Time, days int) (*ChessboardResult, error) {
 	if days <= 0 || days > 60 {
 		days = 14
@@ -66,7 +66,7 @@ func (s *AvailabilityService) Chessboard(ctx context.Context, from time.Time, da
 		dayList[i] = from.AddDate(0, 0, i).Format("2006-01-02")
 	}
 
-	bs, err := s.bookings.OverlappingActive(ctx, ids, from, from.AddDate(0, 0, days))
+	bs, err := s.bookings.Overlapping(ctx, ids, from, from.AddDate(0, 0, days))
 	if err != nil {
 		return nil, err
 	}

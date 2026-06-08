@@ -146,6 +146,11 @@ type BookingResponse struct {
 	CreatedAt    time.Time             `json:"createdAt"`
 	UpdatedAt    time.Time             `json:"updatedAt"`
 	History      []StatusEventResponse `json:"history,omitempty"`
+	// BnovoID — идентификатор брони в Bnovo PMS. Несколько наших броней из одной
+	// Bnovo-мультирум-брони делят общий bnovo_id.
+	BnovoID *string `json:"bnovoId,omitempty"`
+	// BnovoNumber — человекочитаемый номер брони в Bnovo ("B-100").
+	BnovoNumber *string `json:"bnovoNumber,omitempty"`
 }
 
 type StatusEventResponse struct {

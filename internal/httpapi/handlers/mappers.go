@@ -140,6 +140,12 @@ func toBookingResp(b domain.Booking, room *domain.Room, prop *domain.Property, g
 	if b.Notes != nil {
 		r.Notes = *b.Notes
 	}
+	if b.BnovoID != nil {
+		r.BnovoID = b.BnovoID
+	}
+	if b.BnovoNumber != nil {
+		r.BnovoNumber = b.BnovoNumber
+	}
 	for _, ev := range history {
 		ser := dto.StatusEventResponse{
 			ToStatus:  ev.ToStatus,

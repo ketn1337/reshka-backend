@@ -1,0 +1,19 @@
+{
+  "_comment_account": "bnovoAccountId (числовой id аккаунта в Bnovo) и bnovoApiKey (API-ключ) — оба берутся в ЛК Bnovo (https://bnovo.ru → Настройки → API).",
+  "_comment_run": "1) заполните bnovoAccountId + bnovoApiKey; 2) make import-bnovo-discover; 3) скопируйте bnovoRoomId/bnovoRoomName в массив rooms; 4) проставьте ourRoomId; 5) cp bnovo-rooms.example.json bnovo-rooms.json; 6) make import-bnovo (или import-bnovo-dry чтобы посмотреть).",
+
+  "bnovoAccountId": 0,
+  "bnovoApiKey": "",
+
+  "dateFrom": "2026-03-08",
+  "dateTo":   "2026-07-08",
+
+  "rooms": [
+    {
+      "_comment": "пример: bnovo_room_id 567 — это «Номер 5» в Аллее Труда; ourRoomId 5 — id из нашей БД (см. make seed + GET /api/admin/rooms).",
+      "bnovoRoomId": 567,
+      "bnovoRoomName": "Номер 5 (Аллея Труда)",
+      "ourRoomId": 5
+    }
+  ]
+}

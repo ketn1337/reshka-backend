@@ -144,6 +144,11 @@ type Booking struct {
 	CreatedBy    *int64    `db:"created_by" json:"createdBy,omitempty"`
 	CreatedAt    time.Time `db:"created_at" json:"createdAt"`
 	UpdatedAt    time.Time `db:"updated_at" json:"updatedAt"`
+	// BnovoID — идентификатор брони в Bnovo PMS. Несколько наших броней из одной
+	// Bnovo-мультирум-брони делят общий bnovo_id.
+	BnovoID *string `db:"bnovo_id" json:"bnovoId,omitempty"`
+	// BnovoNumber — человекочитаемый номер брони в Bnovo ("B-100").
+	BnovoNumber *string `db:"bnovo_number" json:"bnovoNumber,omitempty"`
 }
 
 type BookingStatusEvent struct {

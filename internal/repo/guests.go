@@ -87,3 +87,33 @@ func (r *GuestRepo) Search(ctx context.Context, q string, limit int) ([]domain.G
 	`, pattern, q+"%", limit)
 	return out, err
 }
+
+// WipeAll удаляет всех гостей и сбрасывает sequence.
+// Вызывается после WipeAll на bookings, чтобы FK ON DELETE SET NULL не «висел» в воздухе.
+// Брони уже удалены к этому моменту, поэтому FK-проблем не будет.
+func (r *GuestRepo) WipeAll(ctx context.Context) (int, error) {
+	tx, err := r.db.BeginTxx(ctx, nil)
+	if err != nil {
+		return 0, err
+	}
+	defer func() {
+		if p := recover(); p != nil {
+			_ = tx.Rollback()
+			panic(p)
+		}
+	}()
+	res, err := tx.ExecContext(ctx, `DELETE FROM guests`)
+	if err != nil {
+		_ = tx.Rollback()
+		return 0, err
+	}
+	if _, err := tx.ExecContext(ctx, `ALTER SEQUENCE guests_id_seq RESTART WITH 1`); err != nil {
+		_ = tx.Rollback()
+		return 0, err
+	}
+	if err := tx.Commit(); err != nil {
+		return 0, err
+	}
+	n, _ := res.RowsAffected()
+	return int(n), nil
+}

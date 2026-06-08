@@ -6,3 +6,7 @@ coverage.out
 
 # Фото (генерируются из фронта: make seed-photos)
 static/photos/
+
+# Bnovo-конфиги с реальными ключами (используйте bnovo-rooms.example.json как шаблон)
+bnovo-rooms.json
+bnovo-rooms.local.json

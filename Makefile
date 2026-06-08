@@ -1,4 +1,4 @@
-.PHONY: up down logs migrate seed seed-photos run test fmt vet build
+.PHONY: up down logs migrate seed seed-photos import-bnovo import-bnovo-discover import-bnovo-wipe run test fmt vet build
 
 DB_URL ?= postgres://reshka:reshka@localhost:5432/reshka?sslmode=disable
 
@@ -26,6 +26,18 @@ run:
 dev:
 	go run ./cmd/server
 
+import-bnovo: ## импорт броней из Bnovo PMS (--mode=all|import|wipe|discover, --config=PATH)
+	go run ./cmd/import-bnovo --config=./bnovo-rooms.json
+
+import-bnovo-discover: ## дамп уникальных bnovo_room_id из Bnovo в JSON
+	go run ./cmd/import-bnovo --config=./bnovo-rooms.json --mode=discover
+
+import-bnovo-wipe: ## wipe (--dry-run чтобы посмотреть)
+	go run ./cmd/import-bnovo --config=./bnovo-rooms.json --mode=wipe
+
+import-bnovo-dry: ## dry-run полного импорта
+	go run ./cmd/import-bnovo --config=./bnovo-rooms.json --mode=all --dry-run
+
 test:
 	go test ./...
 
@@ -39,3 +51,4 @@ build:
 	go build -o bin/server ./cmd/server
 	go build -o bin/seed ./cmd/seed
 	go build -o bin/seed-photos ./cmd/seed-photos
+	go build -o bin/import-bnovo ./cmd/import-bnovo
