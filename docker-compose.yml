@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: reshka-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: reshka
+      POSTGRES_PASSWORD: reshka
+      POSTGRES_DB: reshka
+    ports:
+      - "5432:5432"
+    volumes:
+      - reshka_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U reshka -d reshka"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  reshka_pgdata:

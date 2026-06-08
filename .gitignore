@@ -1,0 +1,8 @@
+.env
+/bin/
+*.log
+.DS_Store
+coverage.out
+
+# Фото (генерируются из фронта: make seed-photos)
+static/photos/
