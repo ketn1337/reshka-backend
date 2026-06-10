@@ -78,7 +78,7 @@ func main() {
 	hUsers := handlers.NewUserHandler(usersR)
 
 	router := httpapi.NewRouter(httpapi.Deps{
-		Cfg: cfg,
+		Cfg:   cfg,
 		Users: usersR, Props: propsR, Kinds: kindsR, Rooms: roomsR,
 		Photos: photosR, Guests: guestsR, Bookings: bookingsR, Rates: ratesR,
 		Auth: authSvc, Booking: bookSvc, BookingStat: bookStatSvc, Availability: availSvc,

@@ -14,8 +14,8 @@ import (
 )
 
 type RateHandler struct {
-	rates  *repo.RateRepo
-	kinds  *repo.RoomKindRepo
+	rates *repo.RateRepo
+	kinds *repo.RoomKindRepo
 }
 
 func NewRateHandler(r *repo.RateRepo, k *repo.RoomKindRepo) *RateHandler {

@@ -94,8 +94,8 @@ type CreateBookingRequest struct {
 	RoomID       int64         `json:"roomId" validate:"required"`
 	CheckIn      string        `json:"checkIn" validate:"required"`  // YYYY-MM-DD
 	CheckOut     string        `json:"checkOut" validate:"required"` // YYYY-MM-DD
-	CheckInTime  string        `json:"checkInTime,omitempty"`       // HH:MM, дефолт 14:00
-	CheckOutTime string        `json:"checkOutTime,omitempty"`      // HH:MM, дефолт 12:00
+	CheckInTime  string        `json:"checkInTime,omitempty"`        // HH:MM, дефолт 14:00
+	CheckOutTime string        `json:"checkOutTime,omitempty"`       // HH:MM, дефолт 12:00
 	Adults       int           `json:"adults" validate:"required,min=1"`
 	Source       string        `json:"source,omitempty"`
 	GuestID      *int64        `json:"guestId,omitempty"`
@@ -123,29 +123,29 @@ type ChangeStatusRequest struct {
 }
 
 type BookingResponse struct {
-	ID           int64                 `json:"id"`
-	Code         string                `json:"code"`
-	RoomID       int64                 `json:"roomId"`
-	RoomLabel    string                `json:"roomLabel,omitempty"`
-	PropertyID   int64                 `json:"propertyId"`
-	PropertyTitle string               `json:"propertyTitle,omitempty"`
-	GuestID      *int64                `json:"guestId,omitempty"`
-	Guest        *GuestResponse        `json:"guest,omitempty"`
-	CheckIn      string                `json:"checkIn"`
-	CheckOut     string                `json:"checkOut"`
-	CheckInTime  string                `json:"checkInTime,omitempty"`
-	CheckOutTime string                `json:"checkOutTime,omitempty"`
-	Nights       int                   `json:"nights"`
-	Adults       int                   `json:"adults"`
-	Status       string                `json:"status"`
-	Source       string                `json:"source"`
-	TotalAmount  float64               `json:"totalAmount"`
-	Prepayment   float64               `json:"prepayment"`
-	Notes        string                `json:"notes,omitempty"`
-	CreatedBy    *int64                `json:"createdBy,omitempty"`
-	CreatedAt    time.Time             `json:"createdAt"`
-	UpdatedAt    time.Time             `json:"updatedAt"`
-	History      []StatusEventResponse `json:"history,omitempty"`
+	ID            int64                 `json:"id"`
+	Code          string                `json:"code"`
+	RoomID        int64                 `json:"roomId"`
+	RoomLabel     string                `json:"roomLabel,omitempty"`
+	PropertyID    int64                 `json:"propertyId"`
+	PropertyTitle string                `json:"propertyTitle,omitempty"`
+	GuestID       *int64                `json:"guestId,omitempty"`
+	Guest         *GuestResponse        `json:"guest,omitempty"`
+	CheckIn       string                `json:"checkIn"`
+	CheckOut      string                `json:"checkOut"`
+	CheckInTime   string                `json:"checkInTime,omitempty"`
+	CheckOutTime  string                `json:"checkOutTime,omitempty"`
+	Nights        int                   `json:"nights"`
+	Adults        int                   `json:"adults"`
+	Status        string                `json:"status"`
+	Source        string                `json:"source"`
+	TotalAmount   float64               `json:"totalAmount"`
+	Prepayment    float64               `json:"prepayment"`
+	Notes         string                `json:"notes,omitempty"`
+	CreatedBy     *int64                `json:"createdBy,omitempty"`
+	CreatedAt     time.Time             `json:"createdAt"`
+	UpdatedAt     time.Time             `json:"updatedAt"`
+	History       []StatusEventResponse `json:"history,omitempty"`
 	// BnovoID — идентификатор брони в Bnovo PMS. Несколько наших броней из одной
 	// Bnovo-мультирум-брони делят общий bnovo_id.
 	BnovoID *string `json:"bnovoId,omitempty"`
@@ -193,10 +193,10 @@ type RateRequest struct {
 }
 
 type RateResponse struct {
-	ID          int64  `json:"id"`
-	KindID      int64  `json:"kindId"`
-	DateFrom    string `json:"dateFrom"`
-	DateTo      string `json:"dateTo"`
+	ID          int64   `json:"id"`
+	KindID      int64   `json:"kindId"`
+	DateFrom    string  `json:"dateFrom"`
+	DateTo      string  `json:"dateTo"`
 	WeekdayRate float64 `json:"weekdayRate"`
 	WeekendRate float64 `json:"weekendRate"`
 }
@@ -204,10 +204,10 @@ type RateResponse struct {
 // User (admin)
 
 type CreateUserRequest struct {
-	Email     string `json:"email" validate:"required,email"`
-	Password  string `json:"password" validate:"required,min=6"`
-	Role      string `json:"role" validate:"required,oneof=admin manager receptionist"`
-	FullName  string `json:"fullName" validate:"required"`
+	Email    string `json:"email" validate:"required,email"`
+	Password string `json:"password" validate:"required,min=6"`
+	Role     string `json:"role" validate:"required,oneof=admin manager receptionist"`
+	FullName string `json:"fullName" validate:"required"`
 }
 
 type UpdateUserRequest struct {
