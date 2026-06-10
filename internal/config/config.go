@@ -10,13 +10,13 @@ import (
 
 // Config загружается из переменных окружения (или .env, если кто-то загрузит).
 type Config struct {
-	AppEnv   string
-	AppPort  int
-	BaseURL  string
+	AppEnv  string
+	AppPort int
+	BaseURL string
 
 	DatabaseURL string
 
-	JWTSecret  string
+	JWTSecret   string
 	JWTTTLHours int
 
 	CORSAllowedOrigins []string
@@ -31,14 +31,14 @@ type Config struct {
 // Load читает переменные окружения. Возвращает ошибку, если чего-то критичного не хватает.
 func Load() (*Config, error) {
 	c := &Config{
-		AppEnv:            getEnv("APP_ENV", "dev"),
-		BaseURL:           getEnv("APP_BASE_URL", "http://localhost:5173"),
-		DatabaseURL:       os.Getenv("DATABASE_URL"),
-		JWTSecret:         os.Getenv("JWT_SECRET"),
-		StaticPhotosDir:   getEnv("STATIC_PHOTOS_DIR", "./static/photos"),
-		AdminEmail:        getEnv("ADMIN_EMAIL", "admin@reshka.local"),
-		AdminPassword:     getEnv("ADMIN_PASSWORD", ""),
-		AdminFullName:     getEnv("ADMIN_FULL_NAME", "Администратор"),
+		AppEnv:             getEnv("APP_ENV", "dev"),
+		BaseURL:            getEnv("APP_BASE_URL", "http://localhost:5173"),
+		DatabaseURL:        os.Getenv("DATABASE_URL"),
+		JWTSecret:          os.Getenv("JWT_SECRET"),
+		StaticPhotosDir:    getEnv("STATIC_PHOTOS_DIR", "./static/photos"),
+		AdminEmail:         getEnv("ADMIN_EMAIL", "admin@reshka.local"),
+		AdminPassword:      getEnv("ADMIN_PASSWORD", ""),
+		AdminFullName:      getEnv("ADMIN_FULL_NAME", "Администратор"),
 		CORSAllowedOrigins: splitCSV(getEnv("CORS_ALLOWED_ORIGINS", "http://localhost:5173")),
 	}
 

@@ -27,7 +27,8 @@ type authResponse struct {
 
 // BookingsListResponse — ответ на GET /api/v1/bookings.
 // Реальная структура (виден в swagger + живой ответ):
-//   { "data": { "bookings": [...], "meta": {...} }, "meta": {...} }
+//
+//	{ "data": { "bookings": [...], "meta": {...} }, "meta": {...} }
 //
 // «Внешний» meta — общая пагинация, «внутренний» data.meta — то же самое
 // (Bnovo дублирует). Поддерживаем оба уровня.
@@ -52,20 +53,20 @@ type PageMeta struct {
 // =========================
 
 type RawBooking struct {
-	ID         int64       `json:"id"`
-	Number     string      `json:"number"`
-	Amount     float64     `json:"amount"`
-	HotelID    int64       `json:"hotel_id"`
-	RoomName   string      `json:"room_name"` // top-level, напр. "Пионерская 63 - О9"
-	PlanName   string      `json:"plan_name"`
-	Source     RawSource   `json:"source"`
-	Status     RawStatus   `json:"status"`
-	Customer   RawCustomer `json:"customer"`
-	Dates      RawDates    `json:"dates"`
+	ID         int64        `json:"id"`
+	Number     string       `json:"number"`
+	Amount     float64      `json:"amount"`
+	HotelID    int64        `json:"hotel_id"`
+	RoomName   string       `json:"room_name"` // top-level, напр. "Пионерская 63 - О9"
+	PlanName   string       `json:"plan_name"`
+	Source     RawSource    `json:"source"`
+	Status     RawStatus    `json:"status"`
+	Customer   RawCustomer  `json:"customer"`
+	Dates      RawDates     `json:"dates"`
 	Discount   *RawDiscount `json:"discount,omitempty"`
-	Extra      *RawExtra   `json:"extra,omitempty"` // {"adults":N, "children":N}
-	RoomID     int64       `json:"room_id"`
-	RoomTypeID int64       `json:"room_type_id"`
+	Extra      *RawExtra    `json:"extra,omitempty"` // {"adults":N, "children":N}
+	RoomID     int64        `json:"room_id"`
+	RoomTypeID int64        `json:"room_type_id"`
 	// Prices — посуточная разбивка. Один элемент = одна занятая ночь в одной комнате.
 	// У мультирумной брони здесь несколько разных room_id.
 	Prices []RawPrice `json:"prices"`
@@ -78,9 +79,9 @@ type RawStatus struct {
 }
 
 type RawSource struct {
-	ID        int64  `json:"id"`
-	Name      string `json:"name"`
-	Icon      string `json:"icon,omitempty"`
+	ID         int64   `json:"id"`
+	Name       string  `json:"name"`
+	Icon       string  `json:"icon,omitempty"`
 	Commission float64 `json:"commission,omitempty"`
 }
 
@@ -95,8 +96,8 @@ type RawCustomer struct {
 
 type RawDates struct {
 	CreateDate        string `json:"create_date"`
-	Arrival           string `json:"arrival"`     // "2026-06-15 14:00:00+03"
-	Departure         string `json:"departure"`   // "2026-06-17 12:00:00+03"
+	Arrival           string `json:"arrival"`   // "2026-06-15 14:00:00+03"
+	Departure         string `json:"departure"` // "2026-06-17 12:00:00+03"
 	RealArrival       string `json:"real_arrival,omitempty"`
 	RealDeparture     string `json:"real_departure,omitempty"`
 	OriginalArrival   string `json:"original_arrival,omitempty"`
@@ -118,7 +119,7 @@ type RawExtra struct {
 }
 
 type RawPrice struct {
-	Date           string  `json:"date"`         // "YYYY-MM-DD"
+	Date           string  `json:"date"` // "YYYY-MM-DD"
 	Price          float64 `json:"price"`
 	Policy         string  `json:"policy,omitempty"`
 	RoomID         int64   `json:"room_id"`

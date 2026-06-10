@@ -14,9 +14,9 @@ import (
 )
 
 type AvailabilityHandler struct {
-	props  *repo.PropertyRepo
-	kinds  *repo.RoomKindRepo
-	svc    *service.AvailabilityService
+	props *repo.PropertyRepo
+	kinds *repo.RoomKindRepo
+	svc   *service.AvailabilityService
 }
 
 func NewAvailabilityHandler(p *repo.PropertyRepo, k *repo.RoomKindRepo, s *service.AvailabilityService) *AvailabilityHandler {

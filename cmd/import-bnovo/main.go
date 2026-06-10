@@ -1,16 +1,18 @@
 // import-bnovo — разовый импорт броней из Bnovo PMS в нашу БД.
 //
 // Подкоманды:
-//   --mode=discover   дампит уникальные пары (bnovo_room_id, room_type_name) из всех
-//                     броней в окне date_from..date_to, чтобы заполнить bnovo-rooms.json
-//   --mode=wipe       удаляет все брони + гостей (с бэкапом EXCLUDE)
-//   --mode=import     тянет брони из Bnovo и создаёт локальные
-//   --mode=all        wipe + import одной программой
+//
+//	--mode=discover   дампит уникальные пары (bnovo_room_id, room_type_name) из всех
+//	                  броней в окне date_from..date_to, чтобы заполнить bnovo-rooms.json
+//	--mode=wipe       удаляет все брони + гостей (с бэкапом EXCLUDE)
+//	--mode=import     тянет брони из Bnovo и создаёт локальные
+//	--mode=all        wipe + import одной программой
 //
 // Флаги:
-//   --config=PATH     путь к bnovo-rooms.json (обяз.)
-//   --dry-run         только печать, БД не трогаем
-//   --limit=N         обработать не более N броней (0 = все); для отладки
+//
+//	--config=PATH     путь к bnovo-rooms.json (обяз.)
+//	--dry-run         только печать, БД не трогаем
+//	--limit=N         обработать не более N броней (0 = все); для отладки
 //
 // Идемпотентность: import пропускает бронь, если (bnovo_id, room_id) уже есть.
 package main
@@ -29,8 +31,8 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
-	_ "github.com/lib/pq"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 
 	"github.com/ketn1337/reshka-backend/internal/bnovo"
 	"github.com/ketn1337/reshka-backend/internal/config"
@@ -50,10 +52,10 @@ type roomMapping struct {
 }
 
 type importConfig struct {
-	BnovoAccountID int64         `json:"bnovoAccountId"`
-	BnovoAPIKey    string        `json:"bnovoApiKey"`
-	DateFrom       string        `json:"dateFrom"` // "YYYY-MM-DD"
-	DateTo         string        `json:"dateTo"`
+	BnovoAccountID int64  `json:"bnovoAccountId"`
+	BnovoAPIKey    string `json:"bnovoApiKey"`
+	DateFrom       string `json:"dateFrom"` // "YYYY-MM-DD"
+	DateTo         string `json:"dateTo"`
 	// PropertyPrefixes — белый список префиксов адресов, которые нас интересуют.
 	// Если пусто — импортируем ВСЕ комнаты из Bnovo (опасно, если в аккаунте
 	// несколько объектов, как в нашем случае: Дмитровское, Смольная, Пионерская…).
@@ -257,7 +259,7 @@ func runImport(ctx context.Context, db *sqlx.DB, cfg *importConfig, client *bnov
 
 	var (
 		imported, skippedExists, skippedNoRoom, skippedNoPrices, skippedBadDates, errorsN int
-		totalWarnings                                                                      []string
+		totalWarnings                                                                     []string
 	)
 
 	for _, b := range bookings {
