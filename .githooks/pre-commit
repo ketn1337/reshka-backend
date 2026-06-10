@@ -1,0 +1,42 @@
+#!/bin/sh
+# Runs quick local checks before a commit is finalized.
+#
+# - gofmt check (no writes)
+# - go vet ./...
+# - go test ./...   (skip with SKIP_PRECOMMIT_TESTS=1)
+#
+# The hook only inspects staged Go files so it stays fast.
+# Build is intentionally left to CI.
+
+set -e
+
+cd "$(git rev-parse --show-toplevel)"
+
+# Collect staged Go files (Added / Copied / Modified / Renamed).
+staged=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.go$' || true)
+
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+echo "▶ gofmt check"
+unformatted=$(printf '%s\n' "$staged" | xargs gofmt -l 2>/dev/null || true)
+if [ -n "$unformatted" ]; then
+  echo ""
+  echo "✗ The following files are not gofmt-clean:"
+  printf '  %s\n' $unformatted
+  echo ""
+  echo "  Run: make fmt"
+  exit 1
+fi
+
+echo "▶ go vet"
+go vet ./...
+
+if [ -z "${SKIP_PRECOMMIT_TESTS:-}" ]; then
+  echo "▶ go test"
+  go test ./...
+fi
+
+echo "✓ pre-commit checks passed"
+exit 0

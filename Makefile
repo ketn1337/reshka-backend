@@ -1,4 +1,4 @@
-.PHONY: up down logs migrate seed seed-photos import-bnovo import-bnovo-discover import-bnovo-wipe run test fmt vet build
+.PHONY: up down logs migrate seed seed-photos import-bnovo import-bnovo-discover import-bnovo-wipe run test fmt vet build hooks lint
 
 DB_URL ?= postgres://reshka:reshka@localhost:5432/reshka?sslmode=disable
 
@@ -52,3 +52,17 @@ build:
 	go build -o bin/seed ./cmd/seed
 	go build -o bin/seed-photos ./cmd/seed-photos
 	go build -o bin/import-bnovo ./cmd/import-bnovo
+
+# Включает локальные git-хуки из .githooks/ через core.hooksPath.
+hooks:
+	git config core.hooksPath .githooks
+
+# Локальные проверки без записи файлов. То же самое делает pre-commit хук.
+lint:
+	@output=$$(gofmt -l .); \
+	if [ -n "$$output" ]; then \
+		echo "Files not gofmt-clean:"; \
+		echo "$$output"; \
+		exit 1; \
+	fi
+	go vet ./...
