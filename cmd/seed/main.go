@@ -193,10 +193,10 @@ func roomsForFloor(_ string, _ string, total int) []roomDef {
 			side = "Б"
 		}
 		out = append(out, roomDef{
-			Label:      fmt.Sprintf("Номер %d", i),
-			Short:      fmt.Sprintf("%d", i),
-			Floor:      floor,
-			Side:       side,
+			Label:       fmt.Sprintf("Номер %d", i),
+			Short:       fmt.Sprintf("%d", i),
+			Floor:       floor,
+			Side:        side,
 			Orientation: orientFor(i),
 		})
 	}

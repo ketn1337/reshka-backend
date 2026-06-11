@@ -208,7 +208,6 @@ func nightsBetween(checkIn, checkOut time.Time) int {
 	return d
 }
 
-
 // loadPropsAndKinds подгружает properties и room_kinds по id для списка номеров.
 // Используется хендлерами, чтобы прокинуть названия в RoomResponse.
 func loadPropsAndKinds(ctx context.Context, props propertyGetter, kinds kindGetter, rooms []domain.Room) (map[int64]*domain.Property, map[int64]*domain.RoomKind) {

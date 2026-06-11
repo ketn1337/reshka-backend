@@ -19,14 +19,14 @@ import (
 type Deps struct {
 	Cfg *config.Config
 	// Repos
-	Users     *repo.UserRepo
-	Props     *repo.PropertyRepo
-	Kinds     *repo.RoomKindRepo
-	Rooms     *repo.RoomRepo
-	Photos    *repo.PhotoRepo
-	Guests    *repo.GuestRepo
-	Bookings  *repo.BookingRepo
-	Rates     *repo.RateRepo
+	Users    *repo.UserRepo
+	Props    *repo.PropertyRepo
+	Kinds    *repo.RoomKindRepo
+	Rooms    *repo.RoomRepo
+	Photos   *repo.PhotoRepo
+	Guests   *repo.GuestRepo
+	Bookings *repo.BookingRepo
+	Rates    *repo.RateRepo
 	// Services
 	Auth         *service.AuthService
 	Booking      *service.BookingService

@@ -7,8 +7,8 @@ import "time"
 // =========================
 
 const (
-	RoleAdmin       = "admin"
-	RoleManager     = "manager"
+	RoleAdmin        = "admin"
+	RoleManager      = "manager"
 	RoleReceptionist = "receptionist"
 )
 
@@ -58,8 +58,8 @@ type RoomKind struct {
 // =========================
 
 const (
-	OrientationInner    = "inner"
-	OrientationStreet   = "street"
+	OrientationInner     = "inner"
+	OrientationStreet    = "street"
 	OrientationCourtyard = "courtyard"
 )
 
@@ -110,12 +110,12 @@ type Guest struct {
 // =========================
 
 const (
-	BookingStatusNew         = "new"
-	BookingStatusConfirmed   = "confirmed"
-	BookingStatusCheckedIn   = "checked_in"
-	BookingStatusCheckedOut  = "checked_out"
-	BookingStatusCancelled   = "cancelled"
-	BookingStatusNoShow      = "no_show"
+	BookingStatusNew        = "new"
+	BookingStatusConfirmed  = "confirmed"
+	BookingStatusCheckedIn  = "checked_in"
+	BookingStatusCheckedOut = "checked_out"
+	BookingStatusCancelled  = "cancelled"
+	BookingStatusNoShow     = "no_show"
 )
 
 const (

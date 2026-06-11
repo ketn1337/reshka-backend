@@ -23,8 +23,8 @@ func NewAvailabilityService(r *repo.RoomRepo, b *repo.BookingRepo, rk *repo.Room
 // ChessboardResult — ответ на /api/admin/chessboard.
 // Rooms несут propertyTitle/kindTitle (см. mappers.toRoomResp в DTO-слое).
 type ChessboardResult struct {
-	Rooms    []domain.Room     `json:"rooms"`
-	Days     []string          `json:"days"`
+	Rooms    []domain.Room       `json:"rooms"`
+	Days     []string            `json:"days"`
 	Bookings []ChessboardBooking `json:"bookings"`
 }
 
@@ -133,10 +133,10 @@ func nightsBetween(checkIn, checkOut time.Time) int {
 }
 
 type AvailabilityRoom struct {
-	Room      domain.Room    `json:"room"`
+	Room      domain.Room     `json:"room"`
 	Kind      domain.RoomKind `json:"kind"`
-	Available bool           `json:"available"`
-	Total     float64        `json:"total"`
+	Available bool            `json:"available"`
+	Total     float64         `json:"total"`
 }
 
 func (s *AvailabilityService) Search(ctx context.Context, propertyID, kindID int64, checkIn, checkOut time.Time) ([]AvailabilityRoom, error) {
